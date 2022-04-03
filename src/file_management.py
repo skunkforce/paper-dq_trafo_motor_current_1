@@ -31,6 +31,7 @@ def extract_pico_csv_to_pd(csv_file) -> pd.DataFrame:
     result = result.replace(["∞", "-∞"], [1.0, -1.0])
     result = result.applymap(lambda x: x if isinstance(x, (int, float)) else float(x.replace(",", ".")))
     result.columns = ["A", "B", "C", "D", "E", "F", "G"]
+    result.drop("G", inplace=True, axis=1)
     result.index.names = ["Zeit"]
     result = result.astype(float)
     result.name = Path(csv_file).name
